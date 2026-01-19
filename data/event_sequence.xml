@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_nextevent_order" model="ir.sequence">
+        <field name="name">NextEvent Order</field>
+        <field name="code">nextevent.order</field>
+        <field name="prefix">EVT/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>
