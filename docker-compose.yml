@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: nextevents_db
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  web:
+    image: odoo:17.0
+    container_name: nextevents_odoo
+    depends_on:
+      - db
+      - ml_engine
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./nextevents:/mnt/extra-addons/nextevents
+    restart: unless-stopped
+
+  ml_engine:
+    build: ./ml_engine
+    container_name: nextevents_ml
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./ml_engine:/app
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: nextevents_mysql
+    environment:
+      MYSQL_DATABASE: nextevents_aux
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  odoo-data:
+  db-data:
+ 

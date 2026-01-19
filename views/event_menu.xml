@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_nextevents_root"
+              name="NextEvents"
+              sequence="10"/>
+
+    <menuitem id="menu_nextevent_order"
+              name="Événements"
+              parent="menu_nextevents_root"
+              action="action_nextevent_order"
+              sequence="10"/>
+
+</odoo>
