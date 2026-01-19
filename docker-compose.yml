@@ -55,4 +55,4 @@ services:
 volumes:
   odoo-data:
   db-data:
- 
+  mysql-data:
